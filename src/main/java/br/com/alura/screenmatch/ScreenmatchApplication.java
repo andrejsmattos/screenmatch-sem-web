@@ -5,6 +5,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @SpringBootApplication
 public class ScreenmatchApplication implements CommandLineRunner {
 
@@ -20,5 +23,6 @@ public class ScreenmatchApplication implements CommandLineRunner {
 //		json = consumoApi.obterDados("https://www.omdbapi.com/?t=" + nomeSerie + "&season=1&episode=1&apikey=ef601764");
 //		DadosEpisodio dadosEpisodio = conversor.obterDados(json, DadosEpisodio.class);
 //		System.out.println(dadosEpisodio);
+
 	}
 }
