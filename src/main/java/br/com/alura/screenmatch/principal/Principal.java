@@ -102,28 +102,28 @@ public class Principal {
                         .map(d -> new Episodio(t.numero(), d))
                 ).collect(Collectors.toList());
 
-        episodios.forEach(System.out::println);
+//        episodios.forEach(System.out::println);
 
 //        ------------------------------------------------------------
-//        FILTRAS EPISÓDIOS A PARTIR DA ENTRADA DE UM TRECHO DO TÍTULO
+//        FILTRA EPISÓDIOS A PARTIR DA ENTRADA DE UM TRECHO DO TÍTULO
 
-        System.out.println("Digite um trecho do título do episódio: ");
-
-        var trechoTitulo = sc.nextLine();
-
-        List<Episodio> episodiosBuscados = episodios.stream()
-                .filter(e -> e.getTitulo().toLowerCase().contains(trechoTitulo))
-                .collect(Collectors.toList());
-
-        if(!episodiosBuscados.isEmpty()) {
-            System.out.println("Episódios encontrados!" +
-                                "---------------------");
-            episodiosBuscados.forEach(e -> {
-                System.out.println("Temporada: " + e.getTemporada() + ", Título: " + e.getTitulo());
-            });
-        } else {
-            System.out.println("Episódio não encontrado.");
-        }
+//        System.out.println("Digite um trecho do título do episódio: ");
+//
+//        var trechoTitulo = sc.nextLine();
+//
+//        List<Episodio> episodiosBuscados = episodios.stream()
+//                .filter(e -> e.getTitulo().toLowerCase().contains(trechoTitulo))
+//                .collect(Collectors.toList());
+//
+//        if(!episodiosBuscados.isEmpty()) {
+//            System.out.println("Episódios encontrados!" +
+//                                "---------------------");
+//            episodiosBuscados.forEach(e -> {
+//                System.out.println("Temporada: " + e.getTemporada() + ", Título: " + e.getTitulo());
+//            });
+//        } else {
+//            System.out.println("Episódio não encontrado.");
+//        }
 
 //        -------------------------------------------
 //        FILTRA EPISÓDIOS A PARTIR DO ANO DE ENTRADA
@@ -144,5 +144,30 @@ public class Principal {
 //                                ", episódio: " + e.getTitulo() +
 //                                ", data de lançamento: " + e.getDataLancamento().format(formatador)
 //                ));
+
+//        -----------------------------------------------
+//        CALCULA MÉDIA DAS AVALIAÇÕES DE CADA TEMPORADA
+
+//        Map<Integer, Double> avaliacoPorTemporada = episodios.stream()
+//                .filter(e -> e.getAvaliacao() > 0.0)
+//                .collect(Collectors.groupingBy(Episodio::getTemporada,
+//                        Collectors.averagingDouble(Episodio::getAvaliacao)));
+//        System.out.println(avaliacoPorTemporada);
+
+
+//        -----------------------------------------------
+//        TRAZ ESTATÍSTICAS DA SÉRIE
+
+        DoubleSummaryStatistics est = episodios.stream()
+                .filter(e -> e.getAvaliacao() > 0.0)
+                .collect(Collectors.summarizingDouble(Episodio::getAvaliacao));
+        System.out.println("Avalição média da série: " + est.getAverage());
+        System.out.println("Melhor episódio: " + est.getMax());
+        System.out.println("Pior episódio: " + est.getMin());
+        System.out.println("Quantidade de episódios avaliados: " + est.getCount());
+
+
+
+
     }
 }
