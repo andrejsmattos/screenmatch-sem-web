@@ -1,17 +1,20 @@
 package br.com.alura.screenmatch.models;
 
 public enum Categoria {
-    ACAO("Action"),
-    ROMANCE("Romance"),
-    COMEDIA("Comedy"),
-    DRAMA("Drama"),
-    CRIME("Crime"),
-    ANIMACAO("Animation");
+    ACAO("Action", "Ação"),
+    ROMANCE("Romance", "Romance"),
+    COMEDIA("Comedy", "Comédia"),
+    DRAMA("Drama", "Drama"),
+    CRIME("Crime", "Crime"),
+    ANIMACAO("Animation", "Animação");
 
     private String categoriaOmdb;
 
-    Categoria(String categoriaOmdb) {
+    private String categoriaPortugues;
+
+    Categoria(String categoriaOmdb, String categoriaPortugues) {
         this.categoriaOmdb = categoriaOmdb;
+        this.categoriaPortugues = categoriaPortugues;
     }
 
     public static Categoria fromString(String text) {
@@ -20,6 +23,15 @@ public enum Categoria {
                 return categoria;
             }
         }
-        throw new IllegalArgumentException("Nenhuma categoria encontrada para a string fornecida: ");
+        throw new IllegalArgumentException("Nenhuma categoria encontrada para a string fornecida: " + text);
+    }
+
+    public static Categoria fromPortugues(String text) {
+        for (Categoria categoria: Categoria.values()) {
+            if (categoria.categoriaPortugues.equalsIgnoreCase(text)) {
+                return categoria;
+            }
+        }
+        throw new IllegalArgumentException("Nenhuma categoria encontrada para a string fornecida: " + text);
     }
 }
